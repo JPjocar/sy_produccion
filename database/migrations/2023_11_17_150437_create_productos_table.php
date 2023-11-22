@@ -21,9 +21,11 @@ return new class extends Migration
             //Claves foraneas
             $table->unsignedBigInteger('id_marca')->nullable();
             $table->unsignedBigInteger('id_presentacion');
+            $table->unsignedBigInteger('id_tipo_producto')->nullable();
             //Relaciones
             $table->foreign('id_marca')->references('id')->on('marcas')->delete('set null');
             $table->foreign('id_presentacion')->references('id')->on('presentaciones')->delete('set null');
+            $table->foreign('id_tipo_producto')->references('id')->on('tipos_producto')->delete('set null');
             
             $table->timestamps();
         });

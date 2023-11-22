@@ -14,5 +14,7 @@
 
 <body>
     @yield('body')
+    <br>
+    <a href="{{route('home')}}">HOME</a>
 </body>
 </html>

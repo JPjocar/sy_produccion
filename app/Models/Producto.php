@@ -26,5 +26,9 @@ class Producto extends Model
     public function recetas(){
         return $this->belongsToMany('App\Models\Receta', 'detalles_receta', 'id_producto', 'id_receta');
     }
+
+    public function tipoProducto(){
+        return $this->belongsTo('App\Models\TipoProducto', 'id_tipo_producto', 'id');
+    }
     
 }

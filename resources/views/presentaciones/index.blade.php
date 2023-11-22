@@ -31,8 +31,5 @@
             @endforeach
         </tbody>
     </table>
-
-    <ul>
     
-    </ul>
 @endsection

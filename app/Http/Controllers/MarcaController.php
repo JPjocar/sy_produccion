@@ -25,7 +25,7 @@ class MarcaController extends Controller
         return redirect()->route('marcas.index');
     }
 
-    public function edit(Marca $marca){
+    public function edit( Marca $marca ){
         return view('marcas.edit', compact('marca'));
     }
 
