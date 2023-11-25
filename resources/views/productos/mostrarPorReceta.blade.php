@@ -3,7 +3,7 @@
 @section('title', 'Mostrando ingredientes de la receta')
 @section('body')
 <h1>RECETA: <strong style="color: red">{{ Str::upper($receta->nombre) }}</strong></h1>
-    <h2><a href="{{Route('recetas.agregarIngredientes', $receta)}}">Agregar un ingrediente nuevo a la receta</a></h2>
+    <h2><a href="{{Route('recetas.crearIngrediente', $receta)}}">Agregar un ingrediente nuevo a la receta</a></h2>
     <h2>Ingredientes de receta: </h2>
     <table border="1">
         <thead>
@@ -31,7 +31,7 @@
                 <td>{{ $producto->pivot->subtotal }}</td> 
                 <td>{{ $producto->estado }}</td> 
                 <td>
-                    <a href="">EDIT</a>
+                    <a href="{{route('recetas.editarIngrediente', ['receta'=>$receta, 'producto'=>$producto])}}">EDIT</a>
                     <form action="" method="POST" style="display: inline">
                         @csrf
                         @method('delete')
@@ -44,4 +44,3 @@
         </tbody>
     </table> 
 @endsection
-

@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->decimal('precio_producto', 8, 2);
             $table->integer('cantidad');
-            $table->integer('subtotal');
+            $table->decimal('subtotal', 8, 2);
 
             //Llaves foraneas
             $table->foreign('id_receta')->references('id')->on('recetas');

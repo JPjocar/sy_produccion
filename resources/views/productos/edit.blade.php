@@ -3,7 +3,7 @@
 @section('body')
     <h1>EDITANDO: {{ $producto->nombre }}</h1>
 
-    <form action="{{Route('productos.update', $producto->id)}}" method="POST">
+    <form action="{{Route('productos.actualizar', $producto->id)}}" method="POST">
         @csrf
         @method('put')
         <div>

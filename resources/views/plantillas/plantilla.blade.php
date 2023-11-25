@@ -9,12 +9,21 @@
         .hidden{
             display: none;
         }
+        .enlace{
+            text-decoration: none;
+            display: inline-block;
+            background-color: royalblue;
+            color: white;
+            padding: 5px;
+        }
     </style>
 </head>
 
 <body>
     @yield('body')
     <br>
-    <a href="{{route('home')}}">HOME</a>
+    <a class="enlace" href="{{route('presentaciones.index')}}">PRESENTACIONES</a>
+    <a class="enlace" href="{{route('marcas.index')}}">MARCAS</a>
+    <a class="enlace" href="{{route('tipoProducto.index')}}">PRODUCTOS</a>
 </body>
 </html>

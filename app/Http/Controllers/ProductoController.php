@@ -9,9 +9,14 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    public function showByType( TipoProducto $tipoProducto ){
+    public function mostrarPorTipo( TipoProducto $tipoProducto ){
         $productos = $tipoProducto->productos()->orderBy('id', 'desc')->get();
         return view('productos.show', compact('tipoProducto', 'productos'));
+    }
+
+    public function mostrarPorReceta( Receta $receta ){
+        $productos = $receta->productos()->get();
+        return view('productos.mostrarPorReceta', compact('receta', 'productos'));
     }
 
     public function create( $tipoProducto ){
@@ -30,20 +35,26 @@ class ProductoController extends Controller
         $producto->id_presentacion = 2;
         $producto->id_tipo_producto = $request->tipoProducto;
         $producto->save();
-        return redirect()->route('productos.show', $request->tipoProducto);
+        return redirect()->route('productos.showByType', $request->tipoProducto);
     }
 
-    public function edit( Producto $producto ){
+    public function editar( Producto $producto ){
         return view('productos.edit', compact('producto'));
     }
     
-    public function update( Producto $producto, Request $request ){
+    public function actualizar( Producto $producto, Request $request ){
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
         $producto->stock = $request->stock;
         $producto->precio = $request->precio;
         $producto->save();
-        return redirect()->route('productos.show', $producto->id_tipo_producto);
+        return redirect()->route('productos.mostrarPorTipo', $producto->id_tipo_producto);
+    }
+
+    public function destruir( Producto $producto ){
+        $id_tipo_producto = $producto->id_tipo_producto;
+        $producto->delete();
+        return redirect()->route('productos.mostrarPorTipo', $id_tipo_producto);
     }
 
 }

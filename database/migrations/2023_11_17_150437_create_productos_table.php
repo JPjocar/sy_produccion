@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->boolean('estado');
             $table->decimal('precio', 8, 2);
+            //falta poner un precio_acumulador de las compras
             //Claves foraneas
             $table->unsignedBigInteger('id_marca')->nullable();
             $table->unsignedBigInteger('id_presentacion');

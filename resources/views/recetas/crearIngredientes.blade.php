@@ -1,20 +1,27 @@
-
 @extends('plantillas.plantilla')
-@section('title', 'Mostrando ingredientes de la receta')
+@section('title', 'Agregar ingredientes a la receta')
 @section('body')
 <h1>RECETA: <strong style="color: red">{{ Str::upper($receta->nombre) }}</strong></h1>
-    <h2><a href="{{Route('recetas.agregarIngredientes', $receta)}}">Agregar un ingrediente nuevo a la receta</a></h2>
-    <h2>Ingredientes de receta: </h2>
+<div class="formulario">
+    <form action="{{Route('recetas.almacenarIngrediente')}}" method="POST">
+        @csrf
+        <label>ID del ingrediente: </label>
+        <input type="text" name="id_ingrediente" required>
+        <input type="hidden" name="id_receta" value="{{$receta->id}}">
+        <label>Cantidad del ingrediente: </label>
+        <input type="number" name="cantidad" required>
+        <button type="submit">Guardar ingrediente en la receta</button>
+    </form>
+</div>
+<h2>Todos los ingredientes disponibles: </h2>
     <table border="1">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
-                <th>Cantidad</th>
                 <th>Precio</th>
-                <th>Subtotal</th>
                 <th>Estado</th>
-                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -24,24 +31,13 @@
             <!-- Si el producto no tiene receta, no se puede vender (mas adelante) -->
             @foreach ($productos as $producto)
             <tr>
+                <td>{{ $producto->id }}</td>
                 <td>{{ $producto->nombre }}</td>
                 <td>{{ $producto->descripcion }}</td>
-                <td>{{ $producto->pivot->cantidad }}</td> 
                 <td>{{ $producto->precio }}</td> <!-- Este es el precio de cada ingrediente -->
-                <td>{{ $producto->pivot->subtotal }}</td> 
                 <td>{{ $producto->estado }}</td> 
-                <td>
-                    <a href="">EDIT</a>
-                    <form action="" method="POST" style="display: inline">
-                        @csrf
-                        @method('delete')
-                        <button type="submit">DELETE</button>
-                    </form>
-                </td>
             </tr>
-            
             @endforeach
         </tbody>
     </table> 
 @endsection
-

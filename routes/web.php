@@ -5,6 +5,8 @@ use App\Http\Controllers\PresentacionController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\RecetaController;
 use App\Http\Controllers\TipoProductoController;
+use App\Models\Producto;
+use App\Models\Receta;
 use App\Models\TipoProducto;
 use Illuminate\Support\Facades\Route;
 
@@ -23,15 +25,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+//CRUD MARCAS
 Route::get('marcas', [MarcaController::class, 'index'])->name('marcas.index');
 Route::get('marcas/create', [MarcaController::class, 'create'])->name('marcas.create');
 Route::post('marcas', [MarcaController::class, 'store'])->name('marcas.store');
-
 Route::get('marcas/{marca}/edit', [MarcaController::class, 'edit'])->name('marcas.edit');
-
 Route::put('marcas/{marca}', [MarcaController::class, 'update'])->name('marcas.update');
 Route::delete('marcas/{marca}', [MarcaController::class, 'destroy'])->name('marcas.destroy');
 
+//CRUD PRESENTACIONES
 Route::get('presentaciones', [PresentacionController::class, 'index'])->name('presentaciones.index');
 Route::get('presentaciones/create', [PresentacionController::class, 'create'])->name('presentaciones.create');
 Route::post('presentaciones', [PresentacionController::class, 'store'])->name('presentaciones.store');
@@ -39,23 +41,45 @@ Route::get('presentaciones/{presentacion}/edit', [PresentacionController::class,
 Route::put('presentaciones/{presentacion}', [PresentacionController::class, 'update'])->name('presentaciones.update');
 Route::delete('presentaciones/{presentacion}', [PresentacionController::class, 'destroy'])->name('presentaciones.destroy');
 
-
+//TIPOSPRODUCTO
 Route::get('tipos-producto', [TipoProductoController::class, 'index'])->name('tipoProducto.index');
 
-//Crear un producto por su tipo
-Route::get('productos/create/{tipoProducto}', [ProductoController::class, 'create'])->name('productos.create');
-Route::post('productos/', [ProductoController::class, 'store'])->name('productos.store');
 
-//Mostrar productos por tipo
-Route::get('productos/{tipoProducto}', [ProductoController::class, 'showBytype'])->name('productos.showByType');
+//PRODUCTOS
 
-//Editar un producto
-Route::get('productos/{producto}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
-Route::put('productos/{producto}', [ProductoController::class, 'update'])->name('productos.update');
+    //Mostrar productos por tipo
+    Route::get('productos/tipo/{tipoProducto}', [ProductoController::class, 'mostrarPorTipo'])->name('productos.mostrarPorTipo');
+
+    //Eliminar producto
+    Route::delete('productos/{producto}', [ProductoController::class, 'destruir'])->name('productos.destruir');
+
+    //Editar un producto (Producto o Ingrediente)
+    Route::get('productos/{producto}/edit', [ProductoController::class, 'editar'])->name('productos.editar');
+    Route::put('productos/{producto}', [ProductoController::class, 'actualizar'])->name('productos.actualizar');
+
+    //Mostrar productos de una receta X
+    Route::get("productos/receta/{receta}", [ProductoController::class, 'mostrarPorReceta'])->name("productos.mostrarPorReceta");
 
 
-//Mostrar recetas de un ingrediente
-Route::get('productos/{producto}/recetas', [RecetaController::class, 'showByProducto'])->name('recetas.showByProducto');
+//RECETAS
 
-//Mostrar recetas de un ingrediente
-Route::get('productos/recetas/{receta}/ingredientes', [RecetaController::class, 'showIngredientes'])->name('recetas.showIngredientes');
+    //Mostrar receta por producto
+    Route::get('recetas/{producto}', [RecetaController::class, 'mostrarPorProducto'])->name('recetas.mostrarPorProducto');
+
+    //Crear una receta
+    Route::get('recetas/create/{producto}', [RecetaController::class, 'crear'])->name("recetas.crear");
+    Route::post('recetas', [RecetaController::class, 'almacenar'])->name('recetas.almacenar');
+
+    //Habilitar una receta y deshabilitar todas las demas
+    Route::put('recetas/{receta}/enable', [RecetaController::class, 'enable'])->name('recetas.enable');
+
+    //Estos ingredientes se agregar a tabla intermedia (Agregar ingredientes a la receta)
+    Route::get('recetas/{receta}/productos/crear', [RecetaController::class, 'crearIngrediente'])->name("recetas.crearIngrediente");
+    Route::post('recetas/productos', [RecetaController::class, 'almacenarIngrediente'])->name('recetas.almacenarIngrediente');
+
+    //Eliminar una receta
+    Route::delete('recetas/{receta}', [RecetaController::class, 'destruir'])->name('recetas.destruir');
+
+    //Editar ingrediente para una receta (tabla intermedia)
+    Route::get('recetas/{receta}/ingrediente/{producto}/edit', [RecetaController::class, 'editarIngrediente'])->name('recetas.editarIngrediente');
+    Route::put('recetas/receta/producto', [ProductoController::class, 'actualizarIngrediente'])->name('actualizarIngrediente');
