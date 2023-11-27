@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('recetas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->text('descripcion');
-            $table->boolean('estado');
-            $table->decimal('precio', 8, 2);
+            $table->text('descripcion')->nullable();
+            $table->boolean('estado')->default(false);
+            $table->decimal('precio', 8, 2)->default(0);
             $table->unsignedBigInteger('id_producto');
             $table->foreign('id_producto')->references('id')->on('productos')->onDelete('cascade');
             $table->timestamps();

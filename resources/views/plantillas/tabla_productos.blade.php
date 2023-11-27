@@ -2,6 +2,7 @@
 @section('title', 'Tabla productos')
 @section('body')
 <h1>@yield('titulo')</h1>
+<h2><a href="{{route('productos.crearPorTipo', $tipoProducto->id)}}">Crear un nuevo {{$tipoProducto->nombre}}</a></h2>
 <table border="1">
     <thead>
         <tr>

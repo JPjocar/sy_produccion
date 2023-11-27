@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('subtotal', 8, 2);
 
             //Llaves foraneas
-            $table->foreign('id_receta')->references('id')->on('recetas');
+            $table->foreign('id_receta')->references('id')->on('recetas')->delete('cascade');
             $table->foreign('id_producto')->references('id')->on('productos');
             
             $table->timestamps();

@@ -11,20 +11,21 @@ class ProductoController extends Controller
 {
     public function mostrarPorTipo( TipoProducto $tipoProducto ){
         $productos = $tipoProducto->productos()->orderBy('id', 'desc')->get();
-        return view('productos.show', compact('tipoProducto', 'productos'));
+        return view('productos.mostrarPorTipo', compact('tipoProducto', 'productos'));
     }
 
     public function mostrarPorReceta( Receta $receta ){
         $productos = $receta->productos()->get();
-        return view('productos.mostrarPorReceta', compact('receta', 'productos'));
+        $product = $receta->producto()->first();
+        return view('productos.mostrarPorReceta', compact('receta', 'productos', 'product'));
     }
 
-    public function create( $tipoProducto ){
+    public function crearPorTipo( $tipoProducto ){
         $tipoProducto = TipoProducto::select('id', 'nombre')->find($tipoProducto);
         return view('productos.create', compact('tipoProducto'));
     }
 
-    public function store( Request $request ){
+    public function almacenar( Request $request ){
         $producto = new Producto();
         $producto->nombre = $request->nombre;
         $producto->descripcion = $request->descripcion;
@@ -32,10 +33,10 @@ class ProductoController extends Controller
         $producto->estado = 1;
         $producto->precio = $request->precio;
         $producto->id_marca = 1;
-        $producto->id_presentacion = 2;
+        $producto->id_presentacion = 1;
         $producto->id_tipo_producto = $request->tipoProducto;
         $producto->save();
-        return redirect()->route('productos.showByType', $request->tipoProducto);
+        return redirect()->route('productos.mostrarPorTipo', $request->tipoProducto);
     }
 
     public function editar( Producto $producto ){

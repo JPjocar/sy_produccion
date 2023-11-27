@@ -43,12 +43,22 @@ Route::delete('presentaciones/{presentacion}', [PresentacionController::class, '
 
 //TIPOSPRODUCTO
 Route::get('tipos-producto', [TipoProductoController::class, 'index'])->name('tipoProducto.index');
+Route::get('tipos-producto/crear', [TipoProductoController::class, 'crear'])->name('tiposProducto.crear');
+Route::post('tipos-producto', [TipoProductoController::class, 'almacenar'])->name('tiposProducto.almacenar');
+Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, 'destruir'])->name('tiposProducto.destruir');
 
 
 //PRODUCTOS
 
     //Mostrar productos por tipo
     Route::get('productos/tipo/{tipoProducto}', [ProductoController::class, 'mostrarPorTipo'])->name('productos.mostrarPorTipo');
+    //Mostrar productos de una receta X (EN DUDA)
+    Route::get("productos/receta/{receta}", [ProductoController::class, 'mostrarPorReceta'])->name("productos.mostrarPorReceta");
+
+
+    //Crear un nuevo producto segun su tipo
+    Route::get('productos/create/{tipoProducto}', [ProductoController::class, 'crearPorTipo'])->name('productos.crearPorTipo');
+    Route::post('productos', [ProductoController::class, 'almacenar'])->name('productos.almacenar');
 
     //Eliminar producto
     Route::delete('productos/{producto}', [ProductoController::class, 'destruir'])->name('productos.destruir');
@@ -57,8 +67,7 @@ Route::get('tipos-producto', [TipoProductoController::class, 'index'])->name('ti
     Route::get('productos/{producto}/edit', [ProductoController::class, 'editar'])->name('productos.editar');
     Route::put('productos/{producto}', [ProductoController::class, 'actualizar'])->name('productos.actualizar');
 
-    //Mostrar productos de una receta X
-    Route::get("productos/receta/{receta}", [ProductoController::class, 'mostrarPorReceta'])->name("productos.mostrarPorReceta");
+    
 
 
 //RECETAS
@@ -82,4 +91,4 @@ Route::get('tipos-producto', [TipoProductoController::class, 'index'])->name('ti
 
     //Editar ingrediente para una receta (tabla intermedia)
     Route::get('recetas/{receta}/ingrediente/{producto}/edit', [RecetaController::class, 'editarIngrediente'])->name('recetas.editarIngrediente');
-    Route::put('recetas/receta/producto', [ProductoController::class, 'actualizarIngrediente'])->name('actualizarIngrediente');
+    Route::put('recetas/{receta}/producto', [RecetaController::class, 'actualizarIngrediente'])->name('recetas.actualizarIngrediente');

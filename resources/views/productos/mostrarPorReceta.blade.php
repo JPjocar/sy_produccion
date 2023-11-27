@@ -9,7 +9,6 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Descripcion</th>
                 <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Subtotal</th>
@@ -25,7 +24,6 @@
             @foreach ($productos as $producto)
             <tr>
                 <td>{{ $producto->nombre }}</td>
-                <td>{{ $producto->descripcion }}</td>
                 <td>{{ $producto->pivot->cantidad }}</td> 
                 <td>{{ $producto->precio }}</td> <!-- Este es el precio de cada ingrediente -->
                 <td>{{ $producto->pivot->subtotal }}</td> 
@@ -43,4 +41,5 @@
             @endforeach
         </tbody>
     </table> 
+    <div><a class="enlace" style="margin-top: 10px" href="{{ route('recetas.mostrarPorProducto', $product) }}">REGRESAR</a></div>
 @endsection

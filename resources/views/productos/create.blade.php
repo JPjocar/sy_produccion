@@ -3,7 +3,7 @@
 @section('body')
     <h1>Crea un {{ $tipoProducto->nombre }}</h1>
 
-    <form action="{{ route('productos.store') }}" method="POST">
+    <form action="{{ route('productos.almacenar') }}" method="POST">
         @csrf
         <div>
             <label for="nombre">Nombre: </label>

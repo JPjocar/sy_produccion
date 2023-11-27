@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use App\Models\Receta;
 use Illuminate\Http\Request;
+use Termwind\Components\Raw;
 
 class RecetaController extends Controller
 {
@@ -12,14 +13,14 @@ class RecetaController extends Controller
         //MOSTRAR RECETAS SOLO CUANDO ESTADO = 1
         // $recetas = $producto->getRecetas()->orderBy('estado', 'desc')->orderBy('id', 'desc')->get();
         $recetas = $producto->getRecetas()->orderBy('id', 'desc')->get();
-        return view('recetas.show', compact('recetas', 'producto'));
+        return view('recetas.mostrarPorProducto', compact('recetas', 'producto'));
     }
 
-    public function showIngredientes( Receta $receta ){
-        $productos = $receta->productos()->get();
-        //NO SE DEBE ENVIAR TODO EL OBJETO RECETA
-        return view('recetas.show_ingredientes', compact('productos', 'receta'));
-    }
+    // public function showIngredientes( Receta $receta ){
+    //     $productos = $receta->productos()->get();
+    //     //NO SE DEBE ENVIAR TODO EL OBJETO RECETA
+    //     return view('recetas.mostrarIngredientes', compact('productos', 'receta'));
+    // }
 
     public function enable(Receta $receta){
         Receta::where('id', '!=', $receta->id)->update(['estado'=>0]);
@@ -68,8 +69,10 @@ class RecetaController extends Controller
         return view('recetas.editarIngrediente', compact('receta', 'producto'));
     }
 
-    public function actualizarIngrediente(Receta $receta, $id_producto){
-        
+    public function actualizarIngrediente(Receta $receta, Request $request){
+        $id_producto = $request->id_producto;
+        $receta->productos()->updateExistingPivot($id_producto, ['cantidad' => $request->cantidad]);
+        return redirect()->route('productos.mostrarPorReceta', $receta);
     }
 
 }

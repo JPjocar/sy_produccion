@@ -1,7 +1,7 @@
 @extends('plantillas.plantilla')
 @section('title', "Receta de $producto->nombre")
 @section('body')
-<h1>MOSTRANDO TODAS LAS RECETAS DE: <strong style="color: red">{{ Str::upper($producto->nombre) }}</strong></h1>
+<h1>MOSTRANDO LAS RECETAS DE: <strong style="color: red">{{ Str::upper($producto->nombre) }}</strong></h1>
 <h2><a href="{{route('recetas.crear', $producto)}}">Crear una nueva receta para este producto</a></h2>
 <table border="1">
     <thead> 
