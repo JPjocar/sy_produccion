@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +12,26 @@
         .enlace{
             text-decoration: none;
             display: inline-block;
-            background-color: royalblue;
+            background-color: rgb(23, 80, 23);
             color: white;
             padding: 5px;
         }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 30px
+        }
+        th{
+            background-color: rgb(65, 105, 225);
+            color: white
+        }
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid black;
+}
     </style>
 </head>
 

@@ -15,7 +15,7 @@
         <td>{{ $producto->stock }}</td>
         <td>{{ $producto->estado ? 'Activo':'Inactivo' }}</td>
         <td>{{ $producto->precio }}</td>
-        <td><a href="{{ route('recetas.mostrarPorProducto', $producto) }}">VER RECETA</a></td>
+        <td><a href="{{ route('recetas.mostrarPorProducto', $producto) }}">VER RECETAS</a></td>
         <td>
             <a href="{{route('productos.editar', $producto->id)}}">EDIT</a>
             <form action="{{Route('productos.destruir', $producto->id)}}" method="POST" style="display: inline">

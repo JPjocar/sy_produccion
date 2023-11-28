@@ -11,19 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detalles_receta', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_receta');
+        Schema::create('historial_precios', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('id_producto');
-            $table->primary(['id_receta', 'id_producto']);
-
-            $table->decimal('precio_producto', 8, 2);
-            $table->integer('cantidad');
-            $table->decimal('subtotal', 8, 2);
-
-            //Llaves foraneas
-            $table->foreign('id_receta')->references('id')->on('recetas')->onDelete('cascade');
+            $table->decimal('precioAnterior', 8, 2);
             $table->foreign('id_producto')->references('id')->on('productos');
-            
             $table->timestamps();
         });
     }
@@ -33,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detalles_receta');
+        Schema::dropIfExists('historial_precios');
     }
 };
