@@ -14,5 +14,6 @@
         <a href="{{route('marcas.index')}}">VER MARCAS</a>
         <a href="{{route('presentaciones.index')}}">VER PRESENTACIONES</a>
         <a href="{{route('tipoProducto.index')}}">VER TIPOS DE PRODUCTO</a>
+        <a href="{{route('compras.indice')}}">VER COMPRAS</a>
     </body>
 </html>

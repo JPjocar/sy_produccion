@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\PresentacionController;
 use App\Http\Controllers\ProductoController;
@@ -32,6 +33,7 @@ Route::post('marcas', [MarcaController::class, 'store'])->name('marcas.store');
 Route::get('marcas/{marca}/edit', [MarcaController::class, 'edit'])->name('marcas.edit');
 Route::put('marcas/{marca}', [MarcaController::class, 'update'])->name('marcas.update');
 Route::delete('marcas/{marca}', [MarcaController::class, 'destroy'])->name('marcas.destroy');
+Route::post('marcas/filtrar', [MarcaController::class, 'filtrar']);
 
 //CRUD PRESENTACIONES
 Route::get('presentaciones', [PresentacionController::class, 'index'])->name('presentaciones.index');
@@ -92,3 +94,9 @@ Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, '
     //Editar ingrediente para una receta (tabla intermedia)
     Route::get('recetas/{receta}/ingrediente/{producto}/edit', [RecetaController::class, 'editarIngrediente'])->name('recetas.editarIngrediente');
     Route::put('recetas/{receta}/producto', [RecetaController::class, 'actualizarIngrediente'])->name('recetas.actualizarIngrediente');
+
+
+//COMPRAS
+    Route::get('compras', [ComprasController::class, 'indice'])->name('compras.indice');
+    Route::get('compras/create', [ComprasController::class, 'crear'])->name('compras.crear');
+    Route::post('compras', [ComprasController::class, 'almacenar'])->name('compras.almacenar');

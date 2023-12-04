@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     <style>
-        .hidden{
-            display: none;
-        }
+        
         .enlace{
             text-decoration: none;
             display: inline-block;
@@ -27,11 +25,44 @@
             color: white
         }
 
-th, td {
-  text-align: left;
-  padding: 8px;
-  border: 1px solid black;
-}
+        th, td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid black;
+        }
+
+        *{
+            box-sizing: border-box;
+            font-family: cascadia code;
+        }
+        .hidden{
+            display: none;
+        }
+        .form{
+            width: 200px;
+            position: relative;
+        } 
+        ul{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+        }
+        ul, input{
+            width: 100%;
+        }
+        li{
+            background-color: beige;
+            cursor: pointer;
+        }
+        li:hover{
+            background-color: bisque;
+        }
+        .selected{
+            background-color: bisque;
+        }
+    
+
     </style>
 </head>
 
@@ -41,5 +72,6 @@ th, td {
     <a class="enlace" href="{{route('presentaciones.index')}}">PRESENTACIONES</a>
     <a class="enlace" href="{{route('marcas.index')}}">MARCAS</a>
     <a class="enlace" href="{{route('tipoProducto.index')}}">PRODUCTOS</a>
+    <a class="enlace" href="{{route('compras.indice')}}">COMPRAS</a>
 </body>
 </html>

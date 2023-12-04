@@ -30,5 +30,9 @@ class Producto extends Model
     public function tipoProducto(){
         return $this->belongsTo('App\Models\TipoProducto', 'id_tipo_producto', 'id');
     }
+
+    public function compras(){
+        return $this->belongsToMany('App\Models\Compra', 'detalles_compra', 'id_producto', 'id_compra');
+    }
     
 }

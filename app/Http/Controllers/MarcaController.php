@@ -43,4 +43,11 @@ class MarcaController extends Controller
         $marca->delete();
         return redirect()->route('marcas.index');
     }
+
+
+    public function filtrar(Request $request){
+        $word = $request->input('word');
+        $results = Marca::select('id', 'nombre')->where('nombre', 'LIKE', "%$word%")->orderBy('id', 'desc')->get();
+        return json_encode($results);
+    }
 }
