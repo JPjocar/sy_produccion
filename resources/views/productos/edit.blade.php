@@ -35,8 +35,27 @@
             {{$message}}
         @enderror
         <div>
+            <label>Marca: </label>
+            <input type="text" name="marca" id="input_search_marca" value="{{old('marca')}}" autocomplete="off" data-model="marcas">
+            <ul class="hidden" id="resultsList_marca"></ul>
+            <input type="hidden" name="id_marca" value="{{old('id_marca')}}" id="id_marca_hidden">
+        </div>
+        @error('id_marca')
+            {{$message}}
+        @enderror
+        <div>
+            <label>Presentacion: </label>
+            <input type="text" name="presentacion" id="input_search_presentacion" value="{{old('presentacion')}}" autocomplete="off" data-model="presentaciones">
+            <ul class="hidden" id="resultsList_presentacion"></ul>
+            <input type="hidden" name="id_presentacion" value="{{old('id_presentacion')}}" id="id_presentacion_hidden">
+        </div>
+        @error('id_presentacion')
+            {{$message}}
+        @enderror
+        <br>
+        <div>
             <button type="submit">EDITAR</button>
         </div>
     </form>
-
+    <script src="{{asset('js/busqueda.js')}}"></script>
 @endsection

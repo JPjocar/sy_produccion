@@ -1,31 +1,35 @@
+
 const token = document.querySelector('input[name="_token"]').value;
 
-const inputMarca = document.querySelector('#input_search_marca');
-const listMarca = document.querySelector('#resultsList_marca');
+const inputMarca = document.getElementById('input_search_marca');
+const listMarca = document.getElementById('resultsList_marca');
+const inputMarcaHidden = document.getElementById('id_marca_hidden');
 
-const inputPresentacion = document.querySelector('#input_search_marca');
+const inputPresentacion = document.getElementById('input_search_presentacion');
+const listPresentacion = document.getElementById('resultsList_presentacion');
+const inputPresentacionHidden = document.getElementById('id_presentacion_hidden');
 
+createSearcher(inputMarca, listMarca, inputMarcaHidden);
+createSearcher(inputPresentacion, listPresentacion, inputPresentacionHidden);
 
-
-function createSearcher(input, list){
-    input.addEventListener('input', (event) => {
-        getInputValue(event, list);
+function createSearcher(input, list, inputHidden){
+    input.addEventListener('input', function(event) {
+        getInputValue(event, list, inputHidden);
     });
-    list.addEventListener('click', (event) => {
-        selectElement(event, input, list);
+    list.addEventListener('click', function(event) {
+        selectElementClick(event, input, this, inputHidden);
     });
-    input.addEventListener('keydown', (event) => {
-        enableElementList(event, list);
+    input.addEventListener('keydown', function(event) {
+        enableElementList(event, list, this, inputHidden);
     });
 }
 
-createSearcher(inputMarca, listMarca);
-
-async function getInputValue(event, list){
+async function getInputValue(event, list, inputHidden){
     const value = event.target.value.trim().toLowerCase();
     const model = event.target.dataset.model;  
     if(!value){
         hiddenList(list); 
+        inputHidden.value = '';
         return;
     }
     const results = await filterResults(value, model);
@@ -43,7 +47,7 @@ function deleteElements(list){
 
 function showResults(results, list){
     const elements = results.reduce((acc, cv, i) => {
-        return acc + `<li data-id="${cv.id}" class="${(i===0?'selected':'')}" >${cv.nombre}</li>`
+        return acc + `<li data-id="${cv.id}" class="${(i===0?'selected':'')}" >${cv.nombre || cv.descripcion}</li>`
     }, "");
     list.innerHTML = elements;
     list.classList.remove('hidden');
@@ -62,14 +66,15 @@ async function filterResults(value, model){
     .catch(error => console.log(error))
 }
 
-function selectElement( evento, input, list ){
+function selectElementClick( evento, input, list, inputHidden ){
     if(!(evento.target.nodeName = "LI")) return;
     const value = evento.target.textContent;
     input.value = value;
+    inputHidden.value = evento.target.dataset.id;
     hiddenList(list);
 }
 
-function enableElementList(event, list){
+function enableElementList(event, list, input, inputHidden){
     const { key } = event;
     let elemento = list.querySelector('li[class="selected"]');
     if(!elemento) return;
@@ -81,10 +86,12 @@ function enableElementList(event, list){
         elemento = elemento.nextElementSibling;
         if(!elemento) elemento = list.firstElementChild;
     }
-    // else if(key==="Enter"){
-    //     input.value = elemento.textContent;
-    //     hiddenList();
-    // }
+    else if(key==="Enter"){
+        event.preventDefault();
+        input.value = elemento.textContent;
+        inputHidden.value = elemento.dataset.id;
+        hiddenList(list);
+    }
     enableElement(elemento);
 }
 

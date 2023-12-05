@@ -44,4 +44,10 @@ class PresentacionController extends Controller
         $presentacion->delete();
         return redirect()->route('presentaciones.index');
     }
+
+    public function filtrar(Request $request){
+        $word = $request->input('word');
+        $results = Presentacion::select('id', 'descripcion')->where('descripcion', 'LIKE', "%$word%")->orderBy('id', 'desc')->get();
+        return json_encode($results);
+    }
 }

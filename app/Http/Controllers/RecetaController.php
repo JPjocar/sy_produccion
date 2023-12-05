@@ -32,6 +32,7 @@ class RecetaController extends Controller
     public function crear(Producto $producto){
         return view('recetas.create', compact('producto'));
     }
+    
     public function almacenar(Request $request){
         $receta = new Receta();
         $receta->nombre = $request->nombre;
@@ -76,13 +77,3 @@ class RecetaController extends Controller
     }
 
 }
-
-
-
-//El problema es porque no detecta ningun cambio (revisar)
-    // public function updateEstado(Receta $receta){
-    //     Receta::query()->update(['nombre'=>'vacio']);
-    //     $receta->nombre = 'xd';
-    //     $receta->save();
-    //     return redirect()->back();
-    // }

@@ -42,6 +42,7 @@ Route::post('presentaciones', [PresentacionController::class, 'store'])->name('p
 Route::get('presentaciones/{presentacion}/edit', [PresentacionController::class, 'edit'])->name('presentaciones.edit');
 Route::put('presentaciones/{presentacion}', [PresentacionController::class, 'update'])->name('presentaciones.update');
 Route::delete('presentaciones/{presentacion}', [PresentacionController::class, 'destroy'])->name('presentaciones.destroy');
+Route::post('presentaciones/filtrar', [PresentacionController::class, 'filtrar']);
 
 //TIPOSPRODUCTO
 Route::get('tipos-producto', [TipoProductoController::class, 'index'])->name('tipoProducto.index');

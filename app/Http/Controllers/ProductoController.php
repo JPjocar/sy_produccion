@@ -32,8 +32,8 @@ class ProductoController extends Controller
         $producto->stock = $request->stock;
         $producto->estado = 1;
         $producto->precio = $request->precio;
-        $producto->id_marca = 1;
-        $producto->id_presentacion = 1;
+        $producto->id_marca = $request->id_marca;
+        $producto->id_presentacion = $request->id_presentacion;
         $producto->id_tipo_producto = $request->tipoProducto;
         $producto->save();
         return redirect()->route('productos.mostrarPorTipo', $request->tipoProducto);
