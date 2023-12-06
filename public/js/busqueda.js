@@ -1,18 +1,7 @@
 
 const token = document.querySelector('input[name="_token"]').value;
 
-const inputMarca = document.getElementById('input_search_marca');
-const listMarca = document.getElementById('resultsList_marca');
-const inputMarcaHidden = document.getElementById('id_marca_hidden');
-
-const inputPresentacion = document.getElementById('input_search_presentacion');
-const listPresentacion = document.getElementById('resultsList_presentacion');
-const inputPresentacionHidden = document.getElementById('id_presentacion_hidden');
-
-createSearcher(inputMarca, listMarca, inputMarcaHidden);
-createSearcher(inputPresentacion, listPresentacion, inputPresentacionHidden);
-
-function createSearcher(input, list, inputHidden){
+export function createSearcher(input, list, inputHidden){
     input.addEventListener('input', function(event) {
         getInputValue(event, list, inputHidden);
     });
@@ -67,7 +56,7 @@ async function filterResults(value, model){
 }
 
 function selectElementClick( evento, input, list, inputHidden ){
-    if(!(evento.target.nodeName = "LI")) return;
+    if(!(evento.target.nodeName === "LI")) return;
     const value = evento.target.textContent;
     input.value = value;
     inputHidden.value = evento.target.dataset.id;
@@ -91,7 +80,7 @@ function enableElementList(event, list, input, inputHidden){
         input.value = elemento.textContent;
         inputHidden.value = elemento.dataset.id;
         hiddenList(list);
-    }
+    } 
     enableElement(elemento);
 }
 

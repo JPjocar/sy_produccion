@@ -57,5 +57,5 @@
             <button type="submit">Crear {{ $tipoProducto->nombre }}</button>
         </div>
     </form>
-    <script src="{{asset('js/busqueda.js')}}"></script>
+    <script src="{{asset('js/busq_crear_producto.js')}}" type="module"></script>
 @endsection

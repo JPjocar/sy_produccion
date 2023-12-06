@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('codigo_compra');
             $table->date('fecha_compra');
             $table->unsignedInteger('total');
+            $table->string('estado', 50);
             $table->timestamps();
         });
     }

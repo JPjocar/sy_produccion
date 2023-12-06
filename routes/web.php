@@ -58,6 +58,7 @@ Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, '
     //Mostrar productos de una receta X (EN DUDA)
     Route::get("productos/receta/{receta}", [ProductoController::class, 'mostrarPorReceta'])->name("productos.mostrarPorReceta");
 
+    Route::post('productos/filtrar', [ProductoController::class, 'filtrar']);
 
     //Crear un nuevo producto segun su tipo
     Route::get('productos/create/{tipoProducto}', [ProductoController::class, 'crearPorTipo'])->name('productos.crearPorTipo');
@@ -100,4 +101,6 @@ Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, '
 //COMPRAS
     Route::get('compras', [ComprasController::class, 'indice'])->name('compras.indice');
     Route::get('compras/create', [ComprasController::class, 'crear'])->name('compras.crear');
-    Route::post('compras', [ComprasController::class, 'almacenar'])->name('compras.almacenar');
+    Route::get('compras/{compra}/asignarProductos', [ComprasController::class, 'asignarProductos'])->name('compras.asignarProductos');
+    Route::post('compras/{compra}/producto', [ComprasController::class, 'almacenar'])->name('compras.almacenar');
+    Route::delete('compras/{compra}/eliminarProductos', [ComprasController::class, 'eliminarProductos'])->name('compras.eliminarProductos');

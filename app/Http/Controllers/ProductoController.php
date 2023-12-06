@@ -58,4 +58,10 @@ class ProductoController extends Controller
         return redirect()->route('productos.mostrarPorTipo', $id_tipo_producto);
     }
 
+    public function filtrar(Request $request){
+        $word = $request->input('word');
+        $productos = Producto::select('id', 'nombre')->where("nombre", "LIKE", "%$word%")->orderBy('id', 'desc')->get();
+        return json_encode($productos);
+    }
+
 }
