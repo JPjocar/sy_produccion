@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @yield('estilos')
     <title>@yield('title')</title>
     <style>
-        
+        *{
+            box-sizing: border-box;
+            font-family: cascadia code;
+
+        }
         .enlace{
             text-decoration: none;
             display: inline-block;
-            background-color: rgb(23, 80, 23);
+            background-color: rgb(64, 134, 64);
             color: white;
             padding: 5px;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
         }
         table {
             border-collapse: collapse;
@@ -31,10 +39,7 @@
         border: 1px solid black;
         }
 
-        *{
-            box-sizing: border-box;
-            font-family: cascadia code;
-        }
+        
         .hidden{
             display: none;
         }
@@ -61,17 +66,28 @@
         .selected{
             background-color: bisque;
         }
-    
+        .nav{
+            background-color: red;
+            display: flex;
+            flex-grow: 1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
 
     </style>
 </head>
 
 <body>
+    
+    <div class="nav">
+        <a class="enlace" href="{{route('presentaciones.index')}}">PRESENTACIONES</a>
+        <a class="enlace" href="{{route('marcas.index')}}">MARCAS</a>
+        <a class="enlace" href="{{route('tipoProducto.index')}}">PRODUCTOS</a>
+        <a class="enlace" href="{{route('compras.indice')}}">COMPRAS</a>
+    </div>
     @yield('body')
     <br>
-    <a class="enlace" href="{{route('presentaciones.index')}}">PRESENTACIONES</a>
-    <a class="enlace" href="{{route('marcas.index')}}">MARCAS</a>
-    <a class="enlace" href="{{route('tipoProducto.index')}}">PRODUCTOS</a>
-    <a class="enlace" href="{{route('compras.indice')}}">COMPRAS</a>
+    
+        
 </body>
 </html>
