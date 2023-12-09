@@ -33,7 +33,7 @@
                     <td>{{ $compra->codigo_compra }}</td>
                     <td><a href="{{route('compras.asignarProductos', $compra)}}">{{ $compra->created_at }}</a></td>
                     <td>{{ $compra->fecha_compra }}</td> 
-                    <td>{{ $compra->precio_total }}</td> 
+                    <td>S/{{ $compra->precio_total }}</td> 
                     <td class="e-{{Str::slug($compra->estado)}}">{{ $compra->estado }}</td>
                     <td>
                         <form method="POST" action="{{route('compras.eliminar', $compra)}}">

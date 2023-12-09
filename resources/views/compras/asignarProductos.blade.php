@@ -48,9 +48,9 @@
                     <tr>
                         <td>{{$producto->id}}</td>
                         <td>{{$producto->nombre}}</td>
-                        <td>{{$producto->pivot->precio}}</td>
+                        <td>S/{{$producto->pivot->precio}}</td>
                         <td>{{$producto->pivot->cantidad}}</td>
-                        <td>{{$producto->pivot->subtotal}}</td>
+                        <td>S/{{$producto->pivot->subtotal}}</td>
                         @if($compra->estado!=="Completado")
                             <td>
                                 <form method="POST" action="{{route('compras.eliminarProducto', ['compra'=>$compra, 'producto'=>$producto])}}">
@@ -65,7 +65,7 @@
                     <tr>
                         <td></td><td></td><td></td>
                         <td>TOTAL</td>
-                        <td>{{ $compra->precio_total }}</td>
+                        <td>S/{{ $compra->precio_total }}</td>
                         
                     </tr>
             </tbody>

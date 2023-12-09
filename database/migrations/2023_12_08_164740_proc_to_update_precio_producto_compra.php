@@ -15,9 +15,9 @@ return new class extends Migration
         DB::unprepared('
             CREATE PROCEDURE actualizar_precio_compra(IN id_compra INT)
             BEGIN
-                UPDATE productos 
-                INNER JOIN detalles_compra ON productos.id = detalles_compra.id_producto 
-                SET productos.precio = detalles_compra.precio
+                UPDATE productos
+                INNER JOIN detalles_compra ON detalles_compra.id_producto = productos.id
+                SET productos.precio = ((detalles_compra.subtotal+productos.costo_acc)/(detalles_compra.cantidad+productos.stock)), productos.costo_acc = (productos.costo_acc + detalles_compra.subtotal), productos.stock = (productos.stock+detalles_compra.cantidad)
                 WHERE detalles_compra.id_compra = id_compra;
             END
         ');

@@ -46,15 +46,13 @@ class ComprasController extends Controller
     }
 
     public function almacenarProducto( $id_compra, Request $request ){
-        $compra = Compra::select('id', 'precio_total')->find($id_compra);
-
-        $id_producto = $request->id_producto;
-        $cantidad = $request->cantidad;
-        $precio = $request->precio; 
-        $subtotal = $precio * $cantidad;
-
         DB::beginTransaction();
         try {
+            $compra = Compra::select('id', 'precio_total')->find($id_compra);
+            $id_producto = $request->id_producto;
+            $cantidad = $request->cantidad;
+            $precio = $request->precio; 
+            $subtotal = $precio * $cantidad;
             $compra->productos()->attach($id_producto, ['precio'=>$precio, 'cantidad'=>$cantidad, 'subtotal'=>$subtotal]);
             $compra->precio_total += $subtotal;
             $compra->save();
@@ -77,7 +75,7 @@ class ComprasController extends Controller
         }
         DB::beginTransaction();
         try{
-            DB::select("CALL actualizar_precio_compra(\" . $compra->id . \")");
+            DB::select('call actualizar_precio_compra(:id_compra)', ['id_compra' => $compra->id]);
             $compra->codigo_compra = $request->codigo_compra;
             $compra->fecha_compra = $request->fecha_compra;
             $compra->estado = "Completado";
@@ -86,8 +84,6 @@ class ComprasController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
         }
-
-        //Actualizar precios de cada producto
         return redirect()->route('compras.asignarProductos', $compra);
     }
 

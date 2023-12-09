@@ -21,10 +21,11 @@ class ProductoFactory extends Factory
         return [
             'nombre' => $this->faker->name(),
             'descripcion' => $this->faker->text(),
-            'stock' => 23,
+            'stock' => 0,
             'estado' => 1,
-            'precio' => $this->faker->numberBetween(0, 405),
+            'precio' => 0,
             'id_marca' => 1,
+            'costo_acc' => 0,
             'id_presentacion' => 1,
             'id_tipo_producto' => $this->faker->numberBetween(1,2),
         ];
