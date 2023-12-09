@@ -2,11 +2,10 @@
 @section('title', 'Registrar Compra')
 
 @section('body')
-    @if ($compra->estado==="Completado")
-            <h1>COMPRA GUARDADA!!</h1>
-            <h1>Codigo de la compra: "{{ $compra->codigo_compra }}"</h1>
-    @else
-            <h1>Agrega ingredientes a la compra</h1>
+            <h1>CODIGO DE LA COMPRA -> {{ $compra->codigo_compra }}</h1>
+            <h1>FECHA DE LA COMPRA -> {{ $compra->fecha_compra }}</h1>
+            <h2>Agrega ingredientes a la compra</h2>
+        @if($compra->estado!=="Completado")   
             <form method="POST" action="{{route('compras.almacenarProducto', $compra)}}">
                 @csrf
                 <div>
@@ -15,19 +14,30 @@
                     <ul class="hidden" id="resultsList_producto"></ul>
                     <input type="hidden" name="id_producto" value="{{old('id_producto')}}" id="id_producto_hidden">
                 </div>
+                @error('id_producto')
+                    {{$message}}
+                @enderror
+                
                 <div>
                     <label>Cantidad: </label>
-                    <input type="text" name="cantidad" id="cantidad" required autocomplete="off">
+                    <input type="text" name="cantidad" id="cantidad" value="{{old('cantidad')}}" required autocomplete="off">
                 </div>
+                @error('cantidad')
+                    {{$message}}
+                @enderror
+
                 <div>
                     <label>Precio: </label>
-                    <input type="text" name="precio" id="precio" required autocomplete="off">
+                    <input type="text" name="precio" id="precio" value="{{old('precio')}}" required autocomplete="off">
                 </div>
+                @error('precio')
+                    {{$message}}
+                @enderror
+
                 <br>
                 <button type="submit">Agregar</button>
             </form>
-    @endif
-
+        @endif
         <hr>
     <div>
         <table>
@@ -71,29 +81,18 @@
             </tbody>
         </table>
     <div>
-    <br>
     <hr>
     <br>
-    <div>
-        @if($compra->estado!=="Completado")
+    @if($compra->estado!=="Completado")
+        <div>
             <form method="POST" action="{{route('compras.completarCompra', $compra)}}">
                 @csrf
                 @method('PUT')
                 <div>
-                    <label>Codigo de la compra</label>
-                    <input type="text" name="codigo_compra" required autocomplete="off">
-                </div>
-                <div>
-                    <label>Fecha de la compra</label>
-                    <input type="date" name="fecha_compra" required> 
-                </div>
-                <br>
-                <div>
                     <button type="submit">COMPLETAR COMPRA</button>
                 </div>
             </form>
-        @endif
-        
-    </div>
+        </div>
+    @endif
     <script src="{{asset('js/busq_crear_producto_compra.js')}}" type="module"></script>
 @endsection

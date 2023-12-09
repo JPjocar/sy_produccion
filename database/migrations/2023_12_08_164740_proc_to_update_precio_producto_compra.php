@@ -17,7 +17,8 @@ return new class extends Migration
             BEGIN
                 UPDATE productos
                 INNER JOIN detalles_compra ON detalles_compra.id_producto = productos.id
-                SET productos.precio = ((detalles_compra.subtotal+productos.costo_acc)/(detalles_compra.cantidad+productos.stock)), productos.costo_acc = (productos.costo_acc + detalles_compra.subtotal), productos.stock = (productos.stock+detalles_compra.cantidad)
+                SET productos.precio = ((detalles_compra.subtotal+productos.costo_acc)/(detalles_compra.cantidad+productos.stock)),
+                    productos.costo_acc = (productos.costo_acc + detalles_compra.subtotal), productos.stock = (productos.stock+detalles_compra.cantidad)
                 WHERE detalles_compra.id_compra = id_compra;
             END
         ');

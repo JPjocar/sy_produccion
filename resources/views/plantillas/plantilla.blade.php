@@ -82,7 +82,7 @@
     <div class="nav">
         <a class="enlace" href="{{route('presentaciones.index')}}">PRESENTACIONES</a>
         <a class="enlace" href="{{route('marcas.index')}}">MARCAS</a>
-        <a class="enlace" href="{{route('tipoProducto.index')}}">PRODUCTOS</a>
+        <a class="enlace" href="{{route('tipoProducto.index')}}">TIPOS-PRODUCTO</a>
         <a class="enlace" href="{{route('compras.indice')}}">COMPRAS</a>
     </div>
     @yield('body')

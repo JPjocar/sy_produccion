@@ -101,6 +101,7 @@ Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, '
 //COMPRAS
     Route::get('compras', [ComprasController::class, 'indice'])->name('compras.indice');
     Route::get('compras/create', [ComprasController::class, 'crear'])->name('compras.crear');
+    Route::post('compras', [ComprasController::class, 'almacenar'])->name('compras.almacenar');
     Route::put('compras/{compra}/updateState', [ComprasController::class, 'completarCompra'])->name('compras.completarCompra');
 
     Route::delete('compras/{compra}', [ComprasController::class, 'eliminar'])->name('compras.eliminar');
