@@ -20,9 +20,10 @@ return new class extends Migration
 
             $table->primary(['id_compra', 'id_producto']);
             $table->foreign('id_compra')->references('id')->on('compras')->onDelete('cascade');
-            $table->foreign('id_producto')->references('id')->on('productos');
+            $table->foreign('id_producto')->references('id')->on('productos')->onDelete('cascade');
 
-            $table->timestamps();
+            $table->timestamp('pivot_created_at')->nullable();
+            $table->timestamp('pivot_update_at')->nullable();
         });
     }
 

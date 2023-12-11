@@ -31,7 +31,7 @@ class ComprasController extends Controller
 
     public function asignarProductos($id_compra){
         $compra = Compra::select('id', 'codigo_compra', 'precio_total', 'estado', 'fecha_compra')->find($id_compra);
-        $productos = $compra->productos()->select('id', 'nombre')->get();
+        $productos = $compra->productos()->select('id', 'nombre')->orderBy('pivot_created_at', 'desc')->get();
         return view('compras.asignarProductos', compact('compra', 'productos'));
     }
 
@@ -53,14 +53,6 @@ class ComprasController extends Controller
     }
 
     public function almacenarProducto( $id_compra, almacenarProductoRequest $request ){
-        $request->validate([
-            'id_producto' => [
-                Rule::exists('detalles_compra')->where(function ($query) use ($request) {
-                    global $id_compra;
-                    return $query->where('id_compra', $id_compra)->where('id_producto', $request->id_producto);
-                })
-            ]
-        ]);
         DB::beginTransaction();
         try {
             $compra = Compra::select('id', 'precio_total')->find($id_compra);
@@ -68,7 +60,7 @@ class ComprasController extends Controller
             $cantidad = $request->cantidad;
             $precio = $request->precio; 
             $subtotal = $precio * $cantidad;
-            $compra->productos()->attach($id_producto, ['precio'=>$precio, 'cantidad'=>$cantidad, 'subtotal'=>$subtotal]);
+            $compra->productos()->attach($id_producto, ['precio'=>$precio, 'cantidad'=>$cantidad, 'subtotal'=>$subtotal, 'pivot_created_at'=>now()]);
             $compra->precio_total += $subtotal;
             $compra->save();
             DB::commit();
@@ -99,9 +91,18 @@ class ComprasController extends Controller
         return redirect()->route('compras.asignarProductos', $compra);
     }
 
-    public function eliminar(Compra $compra){
-        $compra->delete();
+    public function eliminar($id_compra){
+        DB::beginTransaction();
+        try{
+            $compra = Compra::find($id_compra);
+            DB::select('call delete_compra(:id_compra)', ['id_compra' => $compra->id]);
+            $compra->delete();
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollBack();
+        }
         return redirect()->route('compras.indice');
+        
     }
     
 }
