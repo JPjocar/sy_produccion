@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo_compra')->nullable();
-            $table->date('fecha_compra')->nullable();
+            $table->string('codigo_compra')->unique();
+            $table->date('fecha_compra');
             $table->decimal('precio_total', 8, 2)->default(0);
             $table->string('estado', 50)->default('En Proceso');
             $table->timestamps();

@@ -26,4 +26,5 @@
         </td>
     </tr>
     @endforeach
+    <div>{{ $productos->links() }}</div>
 @endsection

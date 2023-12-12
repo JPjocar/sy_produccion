@@ -10,12 +10,15 @@
         .e-en-proceso{
             color: red
         }
+        h1{
+            text-align: center
+        }
     </style>
 @endsection
 
 @section('body')
-    <h1>Todas las compras</h1>
-    <h2><a href="{{route('compras.crear')}}" class="btn_crear_compra">Crear una nueva compra</a></h2>
+    <h1>Todas las compras &#129534;</h1>
+    <h2><a href="{{route('compras.crear')}}" class="btn_crear_compra">Registrar nueva compra</a></h2>
     <table>
         <thead>
             <tr>
@@ -28,6 +31,7 @@
             </tr>
         </thead>
         <tbody>
+            <div>{{ $compras->links() }}</div>
             @foreach ($compras as $compra)
                 <tr>
                     <td>{{ $compra->codigo_compra }}</td>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,5 +35,11 @@ class Producto extends Model
     public function compras(){
         return $this->belongsToMany('App\Models\Compra', 'detalles_compra', 'id_producto', 'id_compra');
     }
-    
+    protected function nombre() : Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => trim(ucwords(strtolower($value))),
+            get: fn($value) => ucwords($value)
+        );
+    }
 }

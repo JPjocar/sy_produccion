@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\almacenarProductoRequest;
+use App\Http\Requests\almacenarRequest;
 use App\Models\Compra;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,14 +14,14 @@ class ComprasController extends Controller
 {
     public function indice(){
         //Aqui se debe paginar
-        $compras = Compra::select('id', 'codigo_compra', 'fecha_compra', 'precio_total', 'estado', 'created_at')->orderBy('created_at', 'desc')->get();
+        $compras = Compra::select('id', 'codigo_compra', 'fecha_compra', 'precio_total', 'estado', 'created_at')->orderBy('created_at', 'desc')->paginate(15);
         return view('compras.indice', compact('compras'));
     }
 
     public function crear(){
         return view('compras.crear');
     }
-    public function almacenar(Request $request){
+    public function almacenar(almacenarRequest $request){
         $compra = new Compra();
         $compra->estado = "En Proceso";
         $compra->codigo_compra = $request->codigo_compra;

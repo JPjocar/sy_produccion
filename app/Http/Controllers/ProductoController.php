@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ProductoController extends Controller
 {
     public function mostrarPorTipo( TipoProducto $tipoProducto ){
-        $productos = $tipoProducto->productos()->orderBy('id', 'desc')->get();
+        $productos = $tipoProducto->productos()->orderBy('id', 'desc')->paginate(10);
         return view('productos.mostrarPorTipo', compact('tipoProducto', 'productos'));
     }
 

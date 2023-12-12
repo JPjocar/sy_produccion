@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Marca;
 use App\Models\Presentacion;
 use App\Models\Producto;
+use App\Models\TipoProducto;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         Marca::factory(10)->create();
         Presentacion::factory(10)->create();
+        
         Producto::factory(50)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

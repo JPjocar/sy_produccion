@@ -20,7 +20,7 @@
                 
                 <div>
                     <label>Cantidad: </label>
-                    <input type="text" name="cantidad" id="cantidad" value="{{old('cantidad')}}" required autocomplete="off">
+                    <input type="text" name="cantidad" id="cantidad" value="{{old('cantidad')}}" required>
                 </div>
                 @error('cantidad')
                     {{$message}}
@@ -28,7 +28,7 @@
 
                 <div>
                     <label>Precio: </label>
-                    <input type="text" name="precio" id="precio" value="{{old('precio')}}" required autocomplete="off">
+                    <input type="text" name="precio" id="precio" value="{{old('precio')}}" required>
                 </div>
                 @error('precio')
                     {{$message}}
@@ -63,7 +63,7 @@
                         <td>S/{{$producto->pivot->subtotal}}</td>
                         @if($compra->estado!=="Completado")
                             <td>
-                                <form method="POST" action="{{route('compras.eliminarProducto', ['compra'=>$compra, 'producto'=>$producto])}}">
+                                <form method="POST" action="{{route('compras.eliminarProducto', ['compra'=>$compra->id, 'producto'=>$producto->id])}}">
                                     @csrf
                                     @method('delete')
                                     <button type="submit">&#10060;</button>

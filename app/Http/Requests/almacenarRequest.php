@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class almacenarProductoRequest extends FormRequest
+class almacenarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,8 @@ class almacenarProductoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id_producto' => 'required|integer|min:1|exists:productos,id',
-            'cantidad' => 'required|integer|min:1',
-            'precio' => 'required|numeric|min:0',
-            'producto' => 'required|min:1|exists:productos,nombre'
+            'codigo_compra' => 'required|unique:compras|max:255|min:2',
+            'fecha_compra' => 'required|date_format:Y-m-d|after_or_equal:01/01/2000|before_or_equal:01/01/2040'
         ];
     }
 }

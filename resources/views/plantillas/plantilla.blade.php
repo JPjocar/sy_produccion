@@ -67,11 +67,16 @@
             background-color: bisque;
         }
         .nav{
-            background-color: red;
-            display: flex;
+            display: flex;           
             flex-grow: 1;
             border-radius: 5px;
             overflow: hidden;
+        }
+        .enlace:hover{
+            background-color: rgb(64, 134, 64, 0.9);
+        }
+        body{
+            background-color: rgba(0, 0, 0, 0.1)
         }
 
     </style>
