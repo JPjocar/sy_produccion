@@ -1,10 +1,9 @@
 @extends('plantillas.plantilla')
 @section('title', 'Marcas')
 @section('body')
-    <h1>MARCAS</h1>
-    <a href="{{route('marcas.create')}}">CREAR UNA MARCA</a>
-
-
+    <h1>Todas las Marcas</h1>
+    <h2><a href="{{route('marcas.create')}}" class="btn_crear_compra">Registrar nueva Marca</a></h2>
+    <div> {{ $marcas->links() }} </div>
     <table border="1">
         <thead>
             <tr>
@@ -31,5 +30,5 @@
             @endforeach
         </tbody>
     </table>
-
+    
 @endsection

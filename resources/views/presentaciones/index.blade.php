@@ -1,10 +1,9 @@
 @extends('plantillas.plantilla')
 @section('title', 'Presentaciones')
 @section('body')
-    <h1>PRESENTACIONES</h1>
-    <a href="{{route('presentaciones.create')}}">CREAR UNA PRESENTACION</a>
-
-
+    <h1>Todas las Presentaciones</h1>
+    <h2><a href="{{route('presentaciones.create')}}">Crear una presentacion</a></h2>
+    <div> {{ $presentaciones->links() }} </div>
     <table border="1">
         <thead>
             <tr>

@@ -9,7 +9,7 @@ use App\Http\Requests\MarcaRequest;
 class MarcaController extends Controller
 {
     public function index(){
-        $marcas = Marca::select('id', 'nombre', 'descripcion')->orderBy('id', 'desc')->get();
+        $marcas = Marca::select('id', 'nombre', 'descripcion')->orderBy('id', 'desc')->paginate(15);
         return view('marcas.index', compact('marcas'));
     }
 

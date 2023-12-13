@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PresentacionController extends Controller
 {
     public function index(){
-        $presentaciones = Presentacion::select('id', 'descripcion', 'cantidad')->orderBy('id', 'desc')->get();
+        $presentaciones = Presentacion::select('id', 'descripcion', 'cantidad')->orderBy('id', 'desc')->paginate(15);
         return view('presentaciones.index', compact('presentaciones'));
     }
 

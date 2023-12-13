@@ -19,6 +19,7 @@
 @section('body')
     <h1>Todas las compras &#129534;</h1>
     <h2><a href="{{route('compras.crear')}}" class="btn_crear_compra">Registrar nueva compra</a></h2>
+    <div>{{ $compras->links() }}</div>
     <table>
         <thead>
             <tr>
@@ -30,8 +31,7 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
-            <div>{{ $compras->links() }}</div>
+        <tbody>    
             @foreach ($compras as $compra)
                 <tr>
                     <td>{{ $compra->codigo_compra }}</td>

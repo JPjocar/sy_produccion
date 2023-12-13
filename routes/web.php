@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\PresentacionController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\RecetaController;
+use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\TipoProductoController;
 use App\Models\Producto;
 use App\Models\Receta;
@@ -111,3 +113,20 @@ Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, '
     Route::get('compras/{compra}/asignarProductos', [ComprasController::class, 'asignarProductos'])->name('compras.asignarProductos');
     Route::post('compras/{compra}/producto', [ComprasController::class, 'almacenarProducto'])->name('compras.almacenarProducto');
     Route::delete('compras/{compra}/productos/{producto}', [ComprasController::class, 'eliminarProducto'])->name('compras.eliminarProducto');
+
+
+//CLIENTES
+    Route::get('clientes', [ClienteController::class, 'indice'])->name('clientes.indice');
+    Route::get('clientes/crear', [ClienteController::class, 'crear'])->name('clientes.crear');
+    Route::post('clientes', [ClienteController::class, 'almacenar'])->name('clientes.almacenar');
+    Route::delete('clientes/{cliente}', [ClienteController::class, 'eliminar'])->name('clientes.eliminar');
+    Route::get('clientes/{cliente}/editar', [ClienteController::class, 'editar'])->name('clientes.editar');
+    Route::put('clientes/{cliente}', [ClienteController::class, 'actualizar'])->name('clientes.actualizar');
+
+//TIENDAS
+    Route::get('tiendas', [TiendaController::class, 'indice'])->name('tiendas.indice');
+    Route::get('tiendas/crear', [TiendaController::class, 'crear'])->name('tiendas.crear');
+    Route::post('tiendas', [TiendaController::class, 'almacenar'])->name('tiendas.almacenar');
+    Route::delete('tiendas/{tienda}', [TiendaController::class, 'eliminar'])->name('tiendas.eliminar');
+    Route::get('tiendas/{tienda}/editar', [TiendaController::class, 'editar'])->name('tiendas.editar');
+    Route::put('tiendas/{tienda}', [TiendaController::class, 'actualizar'])->name('tiendas.actualizar');

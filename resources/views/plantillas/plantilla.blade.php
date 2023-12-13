@@ -85,10 +85,14 @@
 <body>
     
     <div class="nav">
+        <a class="enlace" href="#">PRODUCCION</a>  
+        <a class="enlace" href="{{route('compras.indice')}}">COMPRAS</a>
+        <a class="enlace" href="#">RECETAS</a>
+        <a class="enlace" href="{{route('tipoProducto.index')}}">TIPOS-PRODUCTO</a>
         <a class="enlace" href="{{route('presentaciones.index')}}">PRESENTACIONES</a>
         <a class="enlace" href="{{route('marcas.index')}}">MARCAS</a>
-        <a class="enlace" href="{{route('tipoProducto.index')}}">TIPOS-PRODUCTO</a>
-        <a class="enlace" href="{{route('compras.indice')}}">COMPRAS</a>
+        <a class="enlace" href="{{route('clientes.indice')}}">CLIENTES</a>  
+        <a class="enlace" href="{{route('tiendas.indice')}}">TIENDAS</a>  
     </div>
     @yield('body')
     <br>
