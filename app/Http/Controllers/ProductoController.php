@@ -60,7 +60,7 @@ class ProductoController extends Controller
 
     public function filtrar(Request $request){
         $word = $request->input('word');
-        $productos = Producto::select('id', 'nombre')->where("nombre", "LIKE", "%$word%")->orderBy('id', 'desc')->get();
+        $productos = Producto::select('id', 'nombre')->where("nombre", "LIKE", "%$word%")->orderBy('id', 'desc')->take(15)->get();
         return json_encode($productos);
     }
 

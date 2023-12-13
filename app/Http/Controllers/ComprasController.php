@@ -36,12 +36,12 @@ class ComprasController extends Controller
         return view('compras.asignarProductos', compact('compra', 'productos'));
     }
 
-    public function eliminarProducto($id_compra, $id_producto){
-        $compra = Compra::select('id', 'precio_total')->find($id_compra);
-        $producto = $compra->productos()->select('subtotal')->find($id_producto);
-        $subtotal = $producto->subtotal;
+    public function eliminarProducto($id_compra, $id_producto){   
         DB::beginTransaction();
         try {
+            $compra = Compra::select('id', 'precio_total')->findOrFail($id_compra);
+            $producto = $compra->productos()->select('subtotal')->find($id_producto);
+            $subtotal = $producto->subtotal;
             $compra->productos()->detach($id_producto);
             $compra->precio_total -= $subtotal;
             $compra->save();
@@ -56,7 +56,7 @@ class ComprasController extends Controller
     public function almacenarProducto( $id_compra, almacenarProductoRequest $request ){
         DB::beginTransaction();
         try {
-            $compra = Compra::select('id', 'precio_total')->find($id_compra);
+            $compra = Compra::select('id', 'precio_total')->findOrFail($id_compra);
             $id_producto = $request->id_producto;
             $cantidad = $request->cantidad;
             $precio = $request->precio; 
@@ -76,7 +76,7 @@ class ComprasController extends Controller
     public function completarCompra($id_compra){
         DB::beginTransaction();
         try{
-            $compra = Compra::select('id', 'codigo_compra', 'fecha_compra', 'estado')->find($id_compra);
+            $compra = Compra::select('id', 'codigo_compra', 'fecha_compra', 'estado')->findOrFail($id_compra);
             $productos = $compra->productos()->select('id')->get();
             $num_productos = count($productos);
             if($num_productos <= 0){
@@ -95,7 +95,7 @@ class ComprasController extends Controller
     public function eliminar($id_compra){
         DB::beginTransaction();
         try{
-            $compra = Compra::find($id_compra);
+            $compra = Compra::findOrFail($id_compra);
             DB::select('call delete_compra(:id_compra)', ['id_compra' => $compra->id]);
             $compra->delete();
             DB::commit();

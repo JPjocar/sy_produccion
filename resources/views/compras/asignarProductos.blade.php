@@ -2,8 +2,8 @@
 @section('title', 'Registrar Compra')
 
 @section('body')
-            <h1>CODIGO DE LA COMPRA -> {{ $compra->codigo_compra }}</h1>
-            <h1>FECHA DE LA COMPRA -> {{ $compra->fecha_compra }}</h1>
+            <h1>CODIGO DE LA COMPRA: {{ $compra->codigo_compra }}</h1>
+            <h1>FECHA DE LA COMPRA: {{ $compra->fecha_compra }}</h1>
             <h2>Agrega ingredientes a la compra</h2>
         @if($compra->estado!=="Completado")   
             <form method="POST" action="{{route('compras.almacenarProducto', $compra)}}">
@@ -14,8 +14,11 @@
                     <ul class="hidden" id="resultsList_producto"></ul>
                     <input type="hidden" name="id_producto" value="{{old('id_producto')}}" id="id_producto_hidden">
                 </div>
+                @error('producto')
+                    {{ $message }}
+                @enderror
                 @error('id_producto')
-                    {{$message}}
+                    {{ $message }}
                 @enderror
                 
                 <div>

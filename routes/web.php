@@ -76,6 +76,8 @@ Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, '
 
 //RECETAS
 
+    
+
     //Mostrar receta por producto
     Route::get('recetas/{producto}', [RecetaController::class, 'mostrarPorProducto'])->name('recetas.mostrarPorProducto');
 
