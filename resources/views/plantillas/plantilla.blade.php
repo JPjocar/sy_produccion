@@ -91,6 +91,7 @@
         <a class="enlace" href="{{route('tipoProducto.index')}}">TIPOS-PRODUCTO</a>
         <a class="enlace" href="{{route('presentaciones.index')}}">PRESENTACIONES</a>
         <a class="enlace" href="{{route('marcas.index')}}">MARCAS</a>
+        <a class="enlace" href="{{route('empleados.index')}}">EMPLEADOS</a>
         <a class="enlace" href="{{route('clientes.indice')}}">CLIENTES</a>  
         <a class="enlace" href="{{route('tiendas.indice')}}">TIENDAS</a>  
     </div>

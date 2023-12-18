@@ -9,7 +9,7 @@ class TipoProducto extends Model
 {
     use HasFactory;
     protected $table = 'tipos_producto';
-
+    protected $fillable = ['tipo'];
 
     public function productos(){
         return $this->hasMany('App\Models\Producto', 'id_tipo_producto', 'id');

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\PresentacionController;
 use App\Http\Controllers\ProductoController;
@@ -130,3 +131,7 @@ Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, '
     Route::delete('tiendas/{tienda}', [TiendaController::class, 'eliminar'])->name('tiendas.eliminar');
     Route::get('tiendas/{tienda}/editar', [TiendaController::class, 'editar'])->name('tiendas.editar');
     Route::put('tiendas/{tienda}', [TiendaController::class, 'actualizar'])->name('tiendas.actualizar');
+
+
+//EMPLEADOS
+    Route::resource('empleados', EmpleadoController::class)->names('empleados');

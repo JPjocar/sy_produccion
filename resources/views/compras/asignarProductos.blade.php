@@ -6,7 +6,7 @@
             <h1>FECHA DE LA COMPRA: {{ $compra->fecha_compra }}</h1>
             <h2>Agrega ingredientes a la compra</h2>
         @if($compra->estado!=="Completado")   
-            <form method="POST" action="{{route('compras.almacenarProducto', $compra)}}">
+            <form method="POST" action="{{route('compras.almacenarProducto', $compra)}}" autocomplete="off">
                 @csrf
                 <div>
                     <label>Producto: </label>

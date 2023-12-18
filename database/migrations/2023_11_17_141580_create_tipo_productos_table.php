@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tipos_producto', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->enum('tipo', ['otros', 'ingrediente', 'producto-final'])->unique();
             $table->text('descripcion')->nullable();
             $table->timestamps();
         });

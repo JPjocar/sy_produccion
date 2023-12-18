@@ -15,7 +15,7 @@
             @foreach ($tiposProducto as $tipo)
                 <tr>
                     <td>{{ $tipo->id }}</td>
-                    <td><a href="{{Route('productos.mostrarPorTipo', $tipo)}}">{{ $tipo->nombre }}</a></td>
+                    <td><a href="{{Route('productos.mostrarPorTipo', $tipo)}}">{{ $tipo->tipo }}</a></td>
                     <td>
                         <form method="POST" action="{{route('tiposProducto.destruir', $tipo)}}">
                             @csrf

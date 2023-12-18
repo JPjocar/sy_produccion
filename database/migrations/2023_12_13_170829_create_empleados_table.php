@@ -20,8 +20,8 @@ return new class extends Migration
             $table->date('fecha_nac');
             $table->string('telefono');
             $table->string('correo');
-            $table->string('estado', 50);
-            $table->date('fecha_alta');
+            $table->string('estado', 50)->default('inactivo');
+            $table->date('fecha_alta')->nullable();
             $table->date('fecha_baja')->nullable();
             $table->timestamps();
         });

@@ -4,7 +4,7 @@
 
 @section('body')
     <h1>CREA TU COMPRA</h1>
-    <form action="{{route('compras.almacenar')}}" method="POST">
+    <form action="{{route('compras.almacenar')}}" method="POST" autocomplete="off">
         @csrf
         <div>
             <label>Codigo de la compra: </label>
@@ -20,9 +20,9 @@
         @error('fecha_compra')
             {{ $message }}
         @enderror
+        <br>
         <div>
             <button  type="submit">CREAR COMPRA</button>
         </div>
     </form>
-
 @endsection
