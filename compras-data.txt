@@ -1,0 +1,19 @@
+1. Realizar una compra
+	.Primero agregar los productos base
+	.Mostrar los productos base "activos"
+	.Seleccionar los productos
+	.Al agregar un ingrediente se necesita saber el id_compra y el id_ingrediente, usa attach nada mas
+	-Si se borra un producto antes de hacer o durante la compra, ¿Que pasa cuando se borra un producto?
+	-Cuando se desactiva un producto se queda en las compras, no se hace nada 
+	-¿Cuando se puede desactivar? cuando su precio y cantidad este en cero
+	-Si se borra un producto o se desactiva se cancela la compra 
+		.Comprobar si el producto esta activo (realizar una iteracion) inner join where estado="activo" 	
+	-Si se ha borrado un producto se debe informar que productos se eliminaron y reenviar a la lista de compras
+	.Para borrar un producto de las compras se deberia atrapar el registro con el id_compra e id_ingrediente
+		delete from detalles_ingrediente where id_compra and id_ingrediente;
+	.Ingresar precio y cantidad por cada producto 
+	.Sumar al subtotal de la compra y sumar las cantidades, todo en una transaccion
+	.Al completar compra se deberia generar los precios reales de cada producto base y su cantidad
+		update productos precio, costo_acc, cantidad
+	.Al borrar una compra se deberia quitarle los precios a cada producto base y su cantidad
+		update productos precio, costo_acc, cantidad
