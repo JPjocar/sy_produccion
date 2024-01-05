@@ -42,4 +42,10 @@ class Producto extends Model
             get: fn($value) => ucwords($value)
         );
     }
+    protected function estado() : Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value === 1 ? 'Activo' : 'Inactivo'
+        );
+    }
 }

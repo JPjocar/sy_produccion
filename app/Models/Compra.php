@@ -24,6 +24,5 @@ class Compra extends Model
             get: fn($value) => strtoupper($value)
         );
     }
-
     
 }

@@ -9,6 +9,14 @@ use Termwind\Components\Raw;
 
 class RecetaController extends Controller
 {
+
+    public function index(){
+        $recetas = Receta::select('id', 'nombre', 'descripcion', 'estado', 'precio', 'id_producto')->with(['producto' => function($query){
+            $query->select('id', 'nombre');
+        }])->get();
+        return view('recetas.index', compact('recetas'));
+    }
+
     public function mostrarPorProducto(Producto $producto){
         //MOSTRAR RECETAS SOLO CUANDO ESTADO = 1
         // $recetas = $producto->getRecetas()->orderBy('estado', 'desc')->orderBy('id', 'desc')->get();

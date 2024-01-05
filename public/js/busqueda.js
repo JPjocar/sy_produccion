@@ -1,9 +1,9 @@
 
 const token = document.querySelector('input[name="_token"]').value;
 
-export function createSearcher(input, list, inputHidden){
+export function createSearcher(input, list, inputHidden, tipo){
     input.addEventListener('input', function(event) {
-        getInputValue(event, list, inputHidden);
+        getInputValue(event, list, inputHidden, tipo);
     });
     list.addEventListener('click', function(event) {
         selectElementClick(event, input, this, inputHidden);
@@ -13,7 +13,7 @@ export function createSearcher(input, list, inputHidden){
     });
 }
 
-async function getInputValue(event, list, inputHidden){
+async function getInputValue(event, list, inputHidden, tipo){
     const value = event.target.value.trim().toLowerCase();
     const model = event.target.dataset.model;  
     if(!value){
@@ -21,7 +21,7 @@ async function getInputValue(event, list, inputHidden){
         inputHidden.value = '';
         return;
     }
-    const results = await filterResults(value, model);
+    const results = await filterResults(value, model, tipo);
     showResults(results, list);
 }
 
@@ -42,8 +42,8 @@ function showResults(results, list){
     list.classList.remove('hidden');
 }
 
-async function filterResults(value, model){
-    return await fetch(`http://127.0.0.1:8000/${model}/filtrar`, {
+async function filterResults(value, model, tipo){
+    return await fetch(`http://127.0.0.1:8000/${model}/filtrar/${tipo}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

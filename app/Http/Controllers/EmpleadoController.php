@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class EmpleadoController extends Controller
 {
     public function index(){
-        $empleados = Empleado::select('id', 'nombre')->paginate(15);
+        $empleados = Empleado::select('id', 'dni', 'nombres', 'ape_paterno', 'telefono', 'correo')->paginate(15);
         return view('empleados.index', compact('empleados'));
     }
     public function create(){

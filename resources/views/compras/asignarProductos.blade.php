@@ -43,6 +43,14 @@
         @endif
         <hr>
     <div>
+        @if(null !== ($productosInactivos = session()->get('error')))
+            <ol>
+                <p>No se ha podido completa la compra. Los siguiente productos han sido eliminados.</p>
+                @foreach ($productosInactivos as $pi)
+                    <li>{{ $pi }}</li>
+                @endforeach
+            </ol>
+        @endif
         <table>
             <thead>
                 <tr>
@@ -79,7 +87,6 @@
                         <td></td><td></td><td></td>
                         <td>TOTAL</td>
                         <td>S/{{ $compra->precio_total }}</td>
-                        
                     </tr>
             </tbody>
         </table>

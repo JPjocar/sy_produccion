@@ -1,7 +1,7 @@
 @extends('plantillas.plantilla')
 @section('title', "Crear $tipoProducto->nombre")
 @section('body')
-    <h1>Crea un {{ $tipoProducto->nombre }}</h1>
+    <h1>Crea un {{ $tipoProducto->tipo }}</h1>
 
     <form action="{{ route('productos.almacenar') }}" method="POST" id="form_create_product">
         @csrf

@@ -30,38 +30,41 @@ Route::get('/', function () {
 })->name('home');
 
 //CRUD MARCAS
-Route::get('marcas', [MarcaController::class, 'index'])->name('marcas.index');
-Route::get('marcas/create', [MarcaController::class, 'create'])->name('marcas.create');
-Route::post('marcas', [MarcaController::class, 'store'])->name('marcas.store');
-Route::get('marcas/{marca}/edit', [MarcaController::class, 'edit'])->name('marcas.edit');
-Route::put('marcas/{marca}', [MarcaController::class, 'update'])->name('marcas.update');
-Route::delete('marcas/{marca}', [MarcaController::class, 'destroy'])->name('marcas.destroy');
-Route::post('marcas/filtrar', [MarcaController::class, 'filtrar']);
+    Route::get('marcas', [MarcaController::class, 'index'])->name('marcas.index');
+    Route::get('marcas/create', [MarcaController::class, 'create'])->name('marcas.create');
+    Route::post('marcas', [MarcaController::class, 'store'])->name('marcas.store');
+    Route::get('marcas/{marca}/edit', [MarcaController::class, 'edit'])->name('marcas.edit');
+    Route::put('marcas/{marca}', [MarcaController::class, 'update'])->name('marcas.update');
+    Route::delete('marcas/{marca}', [MarcaController::class, 'destroy'])->name('marcas.destroy');
+    Route::post('marcas/filtrar', [MarcaController::class, 'filtrar']);
 
 //CRUD PRESENTACIONES
-Route::get('presentaciones', [PresentacionController::class, 'index'])->name('presentaciones.index');
-Route::get('presentaciones/create', [PresentacionController::class, 'create'])->name('presentaciones.create');
-Route::post('presentaciones', [PresentacionController::class, 'store'])->name('presentaciones.store');
-Route::get('presentaciones/{presentacion}/edit', [PresentacionController::class, 'edit'])->name('presentaciones.edit');
-Route::put('presentaciones/{presentacion}', [PresentacionController::class, 'update'])->name('presentaciones.update');
-Route::delete('presentaciones/{presentacion}', [PresentacionController::class, 'destroy'])->name('presentaciones.destroy');
-Route::post('presentaciones/filtrar', [PresentacionController::class, 'filtrar']);
+    Route::get('presentaciones', [PresentacionController::class, 'index'])->name('presentaciones.index');
+    Route::get('presentaciones/create', [PresentacionController::class, 'create'])->name('presentaciones.create');
+    Route::post('presentaciones', [PresentacionController::class, 'store'])->name('presentaciones.store');
+    Route::get('presentaciones/{presentacion}/edit', [PresentacionController::class, 'edit'])->name('presentaciones.edit');
+    Route::put('presentaciones/{presentacion}', [PresentacionController::class, 'update'])->name('presentaciones.update');
+    Route::delete('presentaciones/{presentacion}', [PresentacionController::class, 'destroy'])->name('presentaciones.destroy');
+    Route::post('presentaciones/filtrar', [PresentacionController::class, 'filtrar']);
 
 //TIPOSPRODUCTO
-Route::get('tipos-producto', [TipoProductoController::class, 'index'])->name('tipoProducto.index');
-Route::get('tipos-producto/crear', [TipoProductoController::class, 'crear'])->name('tiposProducto.crear');
-Route::post('tipos-producto', [TipoProductoController::class, 'almacenar'])->name('tiposProducto.almacenar');
-Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, 'destruir'])->name('tiposProducto.destruir');
+    Route::get('tipos-producto', [TipoProductoController::class, 'index'])->name('tipoProducto.index');
+    Route::get('tipos-producto/crear', [TipoProductoController::class, 'crear'])->name('tiposProducto.crear');
+    Route::post('tipos-producto', [TipoProductoController::class, 'almacenar'])->name('tiposProducto.almacenar');
+    Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, 'destruir'])->name('tiposProducto.destruir');
 
 
 //PRODUCTOS
+
+    Route::get('productos/{producto}', [ProductoController::class, 'show'])->name('productos.show');
 
     //Mostrar productos por tipo
     Route::get('productos/tipo/{tipoProducto}', [ProductoController::class, 'mostrarPorTipo'])->name('productos.mostrarPorTipo');
     //Mostrar productos de una receta X (EN DUDA)
     Route::get("productos/receta/{receta}", [ProductoController::class, 'mostrarPorReceta'])->name("productos.mostrarPorReceta");
 
-    Route::post('productos/filtrar', [ProductoController::class, 'filtrar']);
+    Route::post('productos/filtrar/ingrediente', [ProductoController::class, 'filtrarIngredientes']);
+
 
     //Crear un nuevo producto segun su tipo
     Route::get('productos/create/{tipoProducto}', [ProductoController::class, 'crearPorTipo'])->name('productos.crearPorTipo');
@@ -79,7 +82,7 @@ Route::delete('tipos-producto/{tipoProducto}', [TipoProductoController::class, '
 
 //RECETAS
 
-    
+    Route::get('recetas', [RecetaController::class, 'index'])->name('recetas.index');
 
     //Mostrar receta por producto
     Route::get('recetas/{producto}', [RecetaController::class, 'mostrarPorProducto'])->name('recetas.mostrarPorProducto');

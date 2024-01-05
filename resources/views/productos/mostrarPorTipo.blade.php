@@ -1,9 +1,9 @@
 
 
-@if ($tipoProducto->id===1)
+@if ($tipoProducto->tipo==="producto-final")
     @include('plantillas.show_productos')
 @endif
 
-@if ($tipoProducto->id===2)
+@if ($tipoProducto->tipo==="ingrediente")
     @include('plantillas.show_ingredientes')
 @endif

@@ -34,20 +34,26 @@
         <tbody>    
             @foreach ($compras as $compra)
                 <tr>
-                    <td>{{ $compra->codigo_compra }}</td>
-                    <td><a href="{{route('compras.asignarProductos', $compra)}}">{{ $compra->created_at }}</a></td>
+                    <td>
+                        <a href="{{route('compras.asignarProductos', $compra)}}"> 
+                            {{ $compra->codigo_compra }} 
+                        </a>
+                    </td>
+                    <td>{{ $compra->created_at }}</td> 
                     <td>{{ $compra->fecha_compra }}</td> 
                     <td>S/{{ $compra->precio_total }}</td> 
-                    <td class="e-{{Str::slug($compra->estado)}}">{{ $compra->estado }}</td>
-                    <td>
-                        <form method="POST" action="{{route('compras.eliminar', $compra)}}">
-                            @csrf
-                            @method('delete')
-                            <button class="btn_eliminar_compra" type="submit">&#10060;</button>
-                        </form>
-                    </td>
-                </tr>            
-            @endforeach
+                    <td class="e-{{Str::slug($compra->estado)}}"> 
+                        {{ $compra->estado }} 
+                    </td> 
+                    <td> 
+                        <form method="POST" action="{{route('compras.eliminar', $compra)}}"> 
+                            @csrf 
+                            @method('delete') 
+                            <button class="btn_eliminar_compra" type="submit">&#10060;</button> 
+                        </form> 
+                    </td> 
+                </tr>             
+            @endforeach 
         </tbody>
     </table> 
     <script src="./js/confirm_compras_indice.js" type="module"></script>

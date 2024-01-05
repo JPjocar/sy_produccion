@@ -18,7 +18,7 @@ return new class extends Migration
                 UPDATE productos
                 INNER JOIN detalles_compra ON detalles_compra.id_producto = productos.id
                 SET productos.precio = CASE
-                        WHEN (productos.stock - detalles_compra.cantidad) = 0 THEN 0
+                        WHEN (productos.stock - detalles_compra.cantidad) <= 0 THEN 0
                         ELSE ((productos.costo_acc - detalles_compra.subtotal)/(productos.stock - detalles_compra.cantidad))
                     END,
                     productos.costo_acc = (productos.costo_acc - detalles_compra.subtotal),
@@ -27,10 +27,7 @@ return new class extends Migration
             END
         ');
     }
-
-    /**
-     * Reverse the migrations.
-     */
+ 
     public function down(): void
     {
         DB::unprepared('DROP PROCEDURE IF EXISTS delete_compra');

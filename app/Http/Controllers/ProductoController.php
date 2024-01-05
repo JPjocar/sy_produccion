@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
+
+    public function show($id_producto){
+        $producto = Producto::select('id', 'nombre', 'descripcion', 'stock', 'estado', 'precio', 'id_marca', 'id_presentacion', 'id_tipo_producto')
+        ->with(['marca'=>fn($query)=>$query->select('id','nombre'), 'presentacion'=>fn($query)=>$query->select('id','descripcion'), 'tipoProducto'=>fn($query)=>$query->select('id','tipo')])
+        ->find($id_producto);
+        return view('productos.show', compact('producto'));
+    }
     public function mostrarPorTipo( TipoProducto $tipoProducto ){
         $productos = $tipoProducto->productos()->orderBy('id', 'desc')->paginate(10);
         return view('productos.mostrarPorTipo', compact('tipoProducto', 'productos'));
@@ -21,7 +28,7 @@ class ProductoController extends Controller
     }
 
     public function crearPorTipo( $tipoProducto ){
-        $tipoProducto = TipoProducto::select('id', 'nombre')->find($tipoProducto);
+        $tipoProducto = TipoProducto::select('id', 'tipo')->find($tipoProducto);
         return view('productos.create', compact('tipoProducto'));
     }
 
@@ -58,9 +65,10 @@ class ProductoController extends Controller
         return redirect()->route('productos.mostrarPorTipo', $id_tipo_producto);
     }
 
-    public function filtrar(Request $request){
+    public function filtrarIngredientes(Request $request){
         $word = $request->input('word');
-        $productos = Producto::select('id', 'nombre')->where("nombre", "LIKE", "%$word%")->orderBy('id', 'desc')->take(15)->get();
+        $id_ingrediente = TipoProducto::select('id')->where('tipo','=','ingrediente')->first()->id;
+        $productos = Producto::select('id', 'nombre', 'id_tipo_producto')->where("nombre", "LIKE", "%$word%")->where('id_tipo_producto','=', $id_ingrediente)->orderBy('id', 'desc')->take(15)->get();
         return json_encode($productos);
     }
 
